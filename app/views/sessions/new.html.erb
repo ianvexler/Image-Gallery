@@ -1,0 +1,22 @@
+<div class="first_section">
+    <div class="inside_section">
+        <div class="session_form">
+            <h1>Login</h1>
+
+            <% if flash[:alert] %>
+                <div class="flash_alert" role="alert">
+                    <p><%= flash[:alert].split(//).join("<br>").html_safe %></p>
+                </div>
+            <% end %>
+            <%= form_with model: @user, url: login_path do |form| %>
+                <%= form.label "Email" %>
+                <%= form.text_field :email %>
+                <%= form.label "Password" %>
+                <%= form.password_field :password %>
+                <%= form.submit "Login", id: "submit_button" %>
+            <% end %>
+        </div>
+
+        <p>Don't have an account? <%= link_to "Click here", sign_up_path, class: "link_to_page1" %></p>
+    </div>
+</div>
