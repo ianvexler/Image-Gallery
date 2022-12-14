@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-
+  
   # GET /users or /users.json
   def index
     @users = User.all
@@ -8,6 +8,9 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    if session[:user_id].nil?
+      redirect_to login_url
+    end
   end
 
   # GET /users/new
@@ -17,6 +20,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if session[:user_id].nil?
+      redirect_to login_url
+    end
   end
 
   # POST /users or /users.json

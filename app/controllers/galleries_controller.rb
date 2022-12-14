@@ -4,10 +4,20 @@ class GalleriesController < ApplicationController
   # GET /galleries or /galleries.json
   def index
     @galleries = Gallery.all
+    if params[:view_name] == "all_galleries"
+      render 'all_galleries'
+    else
+      if session[:user_id].nil?
+        redirect_to login_url
+      else
+        render 'my_galleries'
+      end
+    end
   end
 
   # GET /galleries/1 or /galleries/1.json
   def show
+    
   end
 
   # GET /galleries/new
@@ -21,6 +31,9 @@ class GalleriesController < ApplicationController
 
   # GET /galleries/1/edit
   def edit
+    if session[:user_id].nil?
+      redirect_to login_url
+    end
   end
 
   # POST /galleries or /galleries.json

@@ -1,12 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Galleries</h1>
+<h1>All Galleries</h1>
 
 <div id="galleries">
   <% @galleries.each do |gallery| %>
     <%= render gallery %>
     <p>
-      <%= link_to "Show this gallery", gallery %>
+      <%= link_to "Show this gallery", gallery_path(gallery.id, view_name: "all_galleries") %>
     </p>
   <% end %>
 </div>

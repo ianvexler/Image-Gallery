@@ -1,7 +1,7 @@
 <nav>
     <ul>
         <li><%= link_to "Home", root_path, class: "nav_link" %></li>
-        <li><%= link_to "Galleries", galleries_path, class: "nav_link" %></li>
+        <li><%= link_to "All Galleries", galleries_path(view_name: "all_galleries"), class: "nav_link" %></li>
         
         <% if session[:logged_in].nil? || !session[:logged_in] %>
             <li><%= link_to "Login", login_path, class: "nav_fake_button", id: "login_button" %></li>
@@ -10,7 +10,7 @@
         <% if session[:logged_in] %>
             <li id="logout_li">
                 <%= form_with model: @user, url: logout_path do |form| %>
-                    <li><%= link_to "My Galleries", galleries_path, class: "nav_link" %></li>
+                    <li><%= link_to "My Galleries", galleries_path(view_name: "my_galleries"), class: "nav_link" %></li>
                     <%= form.submit "Logout", class: "nav_button", id: "logout" %>
                 <% end %>
             </li>

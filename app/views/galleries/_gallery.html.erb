@@ -6,7 +6,7 @@
 
   <p>
     <strong>User:</strong>
-    <%= gallery.user_id %>
+    <% @user = get_user_by_id(gallery.user_id) %>
+    <%= @user.email %>
   </p>
-
 </div>
