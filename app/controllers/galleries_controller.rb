@@ -1,5 +1,5 @@
 class GalleriesController < ApplicationController
-  before_action :set_gallery, only: %i[ show edit update destroy ]
+  before_action :set_gallery, only: %i[ show edit update destroy slideshow ]
 
   # GET /galleries or /galleries.json
   def index
@@ -16,9 +16,7 @@ class GalleriesController < ApplicationController
   end
 
   # GET /galleries/1 or /galleries/1.json
-  def show
-    
-  end
+  def show; end
 
   # GET /galleries/new
   def new
@@ -74,10 +72,19 @@ class GalleriesController < ApplicationController
     end
   end
 
+  # GET /slideshow
+  def slideshow; end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gallery
       @gallery = Gallery.find(params[:id])
+    end
+
+    def check_params
+      if params[:gallery][:title].empty?
+        return false
+      end
     end
 
     # Only allow a list of trusted parameters through.

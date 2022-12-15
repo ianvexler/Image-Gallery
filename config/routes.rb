@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   patch "logout", to: "sessions#delete"
 
   # Gallery routes
-  get "galleries", to: "gallery#index"
+  get "galleries", to: "galleries#index"
+  get "slideshow", to: "galleries#slideshow"
 end
