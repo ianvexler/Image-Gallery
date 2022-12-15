@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-
+  
   # GET /users or /users.json
   def index
     @users = User.all
@@ -8,6 +8,9 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    if session[:user_id].nil?
+      redirect_to login_url
+    end
   end
 
   # GET /users/new
@@ -17,6 +20,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if session[:user_id].nil?
+      redirect_to login_url
+    end
   end
 
   # POST /users or /users.json
@@ -25,7 +31,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        format.html { redirect_to login_url, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }

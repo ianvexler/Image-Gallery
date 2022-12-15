@@ -1,0 +1,20 @@
+<h1><%= @gallery.title %></h1>
+
+<% @images = get_images_by_gallery_id(@gallery.id) %>
+
+<% images_url =  %>
+<% fst_image = @images[0].image_url %>
+<% images_url = fst_image%>
+<% @images.drop(1).each do |image| %>
+    <% images_url = images_url + ","+ image.image_url  %>
+<% end %>
+
+
+<div data-controller="slideshow"
+    data-slideshow-images="<%= images_url %>">
+
+    <img src="<%= fst_image %>" id="img">
+    <button data-action="click->slideshow#next">Next</button>
+    <button data-action="click->slideshow#prev">Previous</button>
+</div> 
+

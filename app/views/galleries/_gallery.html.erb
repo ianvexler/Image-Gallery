@@ -1,0 +1,12 @@
+<div id="<%= dom_id gallery %>">
+  <p>
+    <strong>Title:</strong>
+    <%= gallery.title %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <% @user = get_user_by_id(gallery.user_id) %>
+    <%= @user.email %>
+  </p>
+</div>
