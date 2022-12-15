@@ -4,27 +4,31 @@
 
 <div>
   <% if @gallery.user_id == session[:user_id]%>
-    <%= link_to "Edit this gallery", edit_gallery_path(@gallery) %> |
-    <%= link_to "Add Images", new_image_path(gallery_id: @gallery.id) %> 
-    <%= button_to "Destroy this gallery", @gallery, method: :delete %>
+    <div style="margin-top:10px; margin-bottom:30px;">
+      <%= link_to "Edit Title", edit_gallery_path(@gallery), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %> 
+      <%= link_to "Add Image", new_image_path(gallery_id: @gallery.id), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %> 
+      <%= link_to "Delete Gallery", @gallery, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800", data: { turbo_method: :delete } %>
+    </div>
   <% end %>
 
   <div id="images">
-    <% @images = get_images_by_gallery_id(@gallery.id) %>
-    <% if @images.length > 0 %>
-      <% @images.each do |image| %>
-        <%= render image %>
-        <p>
-          <% if @gallery.user_id == session[:user_id]%>
-            <%= link_to "Edit this image", image %>
+   
+        <% if @images.length > 0 %>
+          <% @images.each do |image| %>
+              <div class="flex flex-wrap w-1/3">
+                <div class="w-full p-1 md:p-2">
+                <span>
+                  <%= render image %>
+                </span>
+                </div>
+              </div>
           <% end %>
-        </p>
-      <% end %>
-    <% else %>
-      <p> This gallery has no images </p>
-    <% end %>
-  </div>
 
+        <% else %>
+          <p> This gallery has no images </p>
+        <% end %>
+    </div>
+      
   <% if @images.length > 0 %>
     <div>
       <%= link_to "Slideshow", slideshow_path(id: @gallery.id) %>

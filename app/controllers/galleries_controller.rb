@@ -16,7 +16,9 @@ class GalleriesController < ApplicationController
   end
 
   # GET /galleries/1 or /galleries/1.json
-  def show; end
+  def show
+    @images = get_images_by_gallery_id(@gallery.id)
+  end
 
   # GET /galleries/new
   def new
@@ -67,24 +69,20 @@ class GalleriesController < ApplicationController
     @gallery.destroy
 
     respond_to do |format|
-      format.html { redirect_to galleries_url, notice: "Gallery was successfully destroyed." }
+      format.html { redirect_to galleries_url(view_name: "my_galleries"), notice: "Gallery was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   # GET /slideshow
-  def slideshow; end
+  def slideshow
+    @images = get_images_by_gallery_id(@gallery.id)
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gallery
       @gallery = Gallery.find(params[:id])
-    end
-
-    def check_params
-      if params[:gallery][:title].empty?
-        return false
-      end
     end
 
     # Only allow a list of trusted parameters through.

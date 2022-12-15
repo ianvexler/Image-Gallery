@@ -1,12 +1,15 @@
 <div id="<%= dom_id gallery %>">
-  <p>
-    <strong>Title:</strong>
-    <%= gallery.title %>
-  </p>
+  <h4 class="text-3xl font-normal leading-normal mt-0 mb-2 text-zinc-800">
+    <%= link_to gallery.title, gallery_path(gallery.id, view_name: "all_galleries") %>
+  </h4>
 
-  <p>
-    <strong>User:</strong>
-    <% @user = get_user_by_id(gallery.user_id) %>
-    <%= @user.email %>
-  </p>
+  <ul class="space-y-1 max-w-md list-none list-inside text-slate-800 dark:text-slate-800">
+    <li>
+        <h6 class="text-xl font-normal leading-normal mt-0 mb-2 text-stone-800">
+          By:
+          <% @user = get_user_by_id(gallery.user_id) %>
+          <%= @user.email %>
+        </h6>
+    </li>
+  </ul>
 </div>
