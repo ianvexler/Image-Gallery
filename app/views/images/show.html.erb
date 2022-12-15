@@ -4,7 +4,7 @@
 
 <div>
   <%= link_to "Edit this image", edit_image_path(@image) %> |
-  <%= link_to "Back to gallery", images_path %>
+  <%= link_to "Back to gallery", gallery_path(@image.gallery_id, view_name: "my_galleries") %>
 
   <%= button_to "Destroy this image", @image, method: :delete %>
 </div>

@@ -63,7 +63,7 @@ class ImagesController < ApplicationController
     @image.destroy
 
     respond_to do |format|
-      format.html { redirect_to images_url, notice: "Image was successfully destroyed." }
+      format.html { redirect_to gallery_path(@image.gallery_id, view_name: "my_galleries"), notice: "Image was successfully destroyed." }
       format.json { head :no_content }
     end
   end

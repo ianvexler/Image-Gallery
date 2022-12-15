@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-    has_secure_password
-
     has_many :galleries, dependent: :destroy
+    
+    has_secure_password
+    validates :email, presence: true 
 end

@@ -1,4 +1,4 @@
-<h1><%= @gallery.title %></h1>
+<h4 class="text-3xl font-normal leading-normal mt-0 mb-2 text-zinc-800"><%= @gallery.title %></h4>
 
 <% @images = get_images_by_gallery_id(@gallery.id) %>
 
@@ -13,8 +13,8 @@
 <div data-controller="slideshow"
     data-slideshow-images="<%= images_url %>">
 
-    <img src="<%= fst_image %>" id="img">
-    <button data-action="click->slideshow#next">Next</button>
     <button data-action="click->slideshow#prev">Previous</button>
+    <button data-action="click->slideshow#next">Next</button>
+    <img src="<%= fst_image %>" id="img" style="width:100%;height:auto;">
 </div> 
 
