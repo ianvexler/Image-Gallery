@@ -10,7 +10,6 @@
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="text-sm lg:flex-grow">
 
-      <%= link_to "Home", root_path, class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
       <%= link_to "All Galleries", galleries_path(view_name: "all_galleries"), class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
     
       <% if session[:logged_in] %>

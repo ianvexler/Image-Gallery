@@ -9,9 +9,9 @@ class ImagesController < ApplicationController
 
   # GET /images/1 or /images/1.json
   def show
-    if session[:user_id].nil?
-      redirect_to login_url
-    end
+   @gallery = get_gallery_by_image_id(@image.gallery_id)
+
+   @view_name = params[:view_name]
   end
 
   # GET /images/new
