@@ -1,3 +1,5 @@
 class MainController < ApplicationController
-    def index; end
+    def index
+        @recent_galleries = Gallery.order(created_at: :desc)
+    end
 end

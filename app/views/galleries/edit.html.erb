@@ -1,10 +1,11 @@
-<h1>Editing gallery</h1>
+<h4 class="text-3xl font-normal leading-normal mt-0 mb-2 text-zinc-800">
+  Edit gallery: <%= @gallery.title %>
+</h4>
 
 <%= render "form", gallery: @gallery %>
 
 <br>
 
 <div>
-  <%= link_to "Show this gallery", @gallery %> |
-  <%= link_to "Back to galleries", galleries_path %>
+  <%= link_to "Back to gallery", @gallery %>
 </div>

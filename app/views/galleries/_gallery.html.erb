@@ -1,6 +1,6 @@
 <div id="<%= dom_id gallery %>">
   <h4 class="text-3xl font-normal leading-normal mt-0 mb-2 text-zinc-800">
-    <%= link_to gallery.title, gallery_path(gallery.id, view_name: "all_galleries") %>
+    <%= link_to gallery.title, gallery_path(gallery.id, view_name: "all_galleries"), class:"text-black hover:text-stone-300" %>
   </h4>
 
   <ul class="space-y-1 max-w-md list-none list-inside text-slate-800 dark:text-slate-800">
