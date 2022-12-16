@@ -19,6 +19,7 @@ class ImagesController < ApplicationController
     if session[:user_id].nil?
       redirect_to login_url
     else
+      @gallery = Gallery.find(@gallery_id)
       @image = Image.new
     end
   end
@@ -63,7 +64,7 @@ class ImagesController < ApplicationController
     @image.destroy
 
     respond_to do |format|
-      format.html { redirect_to gallery_path(@image.gallery_id, view_name: "my_galleries"), notice: "Image was successfully destroyed." }
+      format.html { redirect_to gallery_path(@image.gallery_id, view_name: "my_galleries"), notice: "Image was successfully deleted." }
       format.json { head :no_content }
     end
   end
