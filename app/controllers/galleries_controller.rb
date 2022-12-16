@@ -4,14 +4,14 @@ class GalleriesController < ApplicationController
   # GET /galleries or /galleries.json
   def index
     @galleries = Gallery.all
-    if params[:view_name] == "all_galleries"
-      render 'all_galleries'
-    else
+    if params[:view_name] == "my_galleries"
       if session[:user_id].nil?
         redirect_to login_url
       else
         render 'my_galleries'
       end
+    else
+      render 'all_galleries'
     end
   end
 
@@ -78,7 +78,7 @@ class GalleriesController < ApplicationController
   def slideshow
     @images = get_images_by_gallery_id(@gallery.id)
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gallery

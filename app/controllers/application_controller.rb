@@ -15,4 +15,9 @@ class ApplicationController < ActionController::Base
         galleries = Gallery.where(user_id: session[:user_id]).all
         return galleries
     end
+
+    def get_gallery_by_image_id(gallery_id)
+        gallery = Gallery.find(gallery_id)
+        return gallery
+    end
 end

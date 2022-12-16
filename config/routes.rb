@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :images
+  resources :images, except: [:index]
   resources :users
   resources :sessions
   resources :galleries
@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  root to: "main#index"
+  root to: "galleries#index"
 
   # Sign up routes
   get "sign_up", to: "users#new"
@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   patch "logout", to: "sessions#delete"
 
   # Gallery routes
-  get "galleries", to: "galleries#index"
   get "slideshow", to: "galleries#slideshow"
+
+  # In case incorrect route is given
+  get '*path', to: "error#index"
+
 end
