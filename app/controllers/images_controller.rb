@@ -40,7 +40,7 @@ class ImagesController < ApplicationController
         format.html { redirect_to image_url(@image), notice: "Image was successfully created." }
         format.json { render :show, status: :created, location: @image }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to new_image_path(gallery_id: @gallery_id), status: :unprocessable_entity }
         format.json { render json: @image.errors, status: :unprocessable_entity }
       end
     end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :images, except: [:index]
-  resources :users
+  resources :users, except: [:index]
   resources :sessions
   resources :galleries
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

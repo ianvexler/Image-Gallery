@@ -9,12 +9,14 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= favicon_link_tag asset_path('camera.png') %>
   </head>
 
-  <body>
+  <body class="overscroll-none">
       <%= render partial: "shared/navbar" %>
     <div style="padding: 20px 2%;">
       <%= yield %>
     </div>
+      <%= render partial: "shared/footer" %>
   </body>
 </html>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_14_132923) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_16_192125) do
   create_table "galleries", force: :cascade do |t|
     t.text "title"
     t.integer "user_id", null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_132923) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
   end
 
   add_foreign_key "galleries", "users"

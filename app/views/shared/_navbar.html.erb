@@ -1,33 +1,44 @@
-<nav class="flex items-center justify-between flex-wrap bg-purple-800 p-6">
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <span class="font-semibold text-xl tracking-tight">Image Gallery</span>
-  </div>
-  <div class="block lg:hidden">
-    <button class="flex items-center px-3 py-2 border rounded text-white border-white hover:text-white hover:border-white">
-      <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-    </button>
-  </div>
-  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-sm lg:flex-grow">
-
-      <%= link_to "All Galleries", galleries_path(view_name: "all_galleries"), class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
-    
-      <% if session[:logged_in] %>
-        <%= link_to "My Galleries", galleries_path(view_name: "my_galleries"), class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
-      <% end %>
+<nav class="relative flex flex-wrap items-center justify-between px-2 py-3 bg-blue-800 mb-3 z-20">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+    <div class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
+      <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white" href="#pablo">
+        Image Gallery
+      </a>
+      <button class="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none" type="button" onclick="toggleNavbar('example-collapse-navbar')">
+             <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+      </button>
     </div>
+    <div class="lg:flex flex-grow items-center hidden" id="example-collapse-navbar">
+      <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
+        <li class="nav-item">
+            <%= link_to "All Galleries", galleries_path(view_name: "all_galleries"), class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
+        </li>
+        <li class="nav-item">
+          <% if session[:logged_in] %>
+            <%= link_to "My Galleries", galleries_path(view_name: "my_galleries"), class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <% if session[:logged_in].nil? || !session[:logged_in] %>
+              <div>
+                  <%= link_to "Login", login_path, class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
+                  <%= link_to "Sign Up", sign_up_path, class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
+              </div>
+          <% end %>
 
-    <% if session[:logged_in].nil? || !session[:logged_in] %>
-        <div>
-            <%= link_to "Login", login_path, class: "inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0" %>
-            <%= link_to "Sign Up", sign_up_path, class: "inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0" %>
-        </div>
-    <% end %>
-
-    <% if session[:logged_in] %>
-        <div>
-            <%= link_to "Logout", logout_path, class: "inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0", data: { turbo_method: "post" } %>
-        </div>
-    <% end %>
+          <% if session[:logged_in] %>
+              <div>
+                  <%= link_to "Logout", logout_path, class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4", data: { turbo_method: "post" } %>
+              </div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
+<script>
+  function toggleNavbar(collapseID){
+    document.getElementById(collapseID).classList.toggle("hidden");
+    document.getElementById(collapseID).classList.toggle("flex");
+  }
+</script>
