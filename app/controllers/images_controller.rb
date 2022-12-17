@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :set_image, only: %i[ show edit update destroy ]
+  before_action :set_image, only: %i[ edit show update destroy ]
   before_action :set_gallery_id, only: %i[ new ]
 
   # GET /images or /images.json
@@ -29,6 +29,8 @@ class ImagesController < ApplicationController
     if session[:user_id].nil?
       redirect_to login_url
     end
+
+    @gallery = get_gallery_by_image_id(@image.gallery_id)
   end
 
   # POST /images or /images.json
@@ -72,13 +74,15 @@ class ImagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_image
-      @image = Image.find(params[:id])
+      begin
+        @image = Image.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        redirect_to error_path
+      end
     end
 
     def set_gallery_id
       @gallery_id = params[:gallery_id]
-      print("here")
-      print(@gallery_id)
     end
 
     # Only allow a list of trusted parameters through.

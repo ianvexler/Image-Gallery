@@ -2,7 +2,11 @@
   Edit gallery: <%= @gallery.title %>
 </h4>
 
-<%= render "form", gallery: @gallery %>
+<% if session[:user_id] == @gallery.user_id %>
+  <%= render "form", gallery: @gallery %>
+<% else %>
+  <h5 class="text-2xl font-normal leading-normal mt-0 mb-2 text-stone-800"> You cannot edit this gallery </h5>
+<% end %>
 
 <br>
 

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   # Gallery routes
   get "slideshow", to: "galleries#slideshow"
 
+  get "error", to: "error#index"
+
   # In case incorrect route is given
   get '*path', to: "error#index"
 
