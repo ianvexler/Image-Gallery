@@ -1,16 +1,18 @@
 <%= form_with(model: image) do |form| %>
   <% if image.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(image.errors.count, "error") %> prohibited this image from being saved:</h2>
-
-      <ul>
-        <% image.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div role="alert" class="py-2">
+      <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+          <%= pluralize(image.errors.count, "error") %> prohibited this user from being saved:
+      </div>
+      <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+        <ul>
+          <% image.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
-  
 
   <%= form.label :image, class: "block mb-2 text-sm font-medium text-gray-900" %>
   <%= form.file_field :image, class:"block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" %>

@@ -14,28 +14,28 @@
     </div>
   <% end %>
 
-  <% if @images.length > 0 %>
-    <div style="padding-top:10px; padding-bottom:10px;">
+  <div class="py-5">
+    <% if @images.length > 0 %>
       <%= link_to "Slideshow", slideshow_path(id: @gallery.id), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
-    </div>
 
-    <section class="overflow-hidden text-gray-700">
-      <div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
-        <div class="flex flex-wrap -m-1 md:-m-2">
-            <% @images.each do |image| %>
+      <section class="overflow-hidden text-gray-700">
+        <div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
+          <div class="flex flex-wrap -m-1 md:-m-2">
+              <% @images.each do |image| %>
 
-              <div class="flex flex-wrap w-1/4">
-                <div class="w-full p-1 md:p-2">
-                  <%= link_to image_tag(image.image_url, class: "block object-cover object-center w-full h-full"), image %>
+                <div class="flex flex-wrap w-1/4">
+                  <div class="w-full p-1 md:p-2">
+                    <%= link_to image_tag(image.image_url, class: "block hover:opacity-70 object-cover object-center w-full h-full"), image %>
+                  </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
+          </div>
         </div>
-      </div>
-    </section>
-  <% else %>
-    <p> This gallery has no images </p>
-  <% end %>
+      </section>
+    <% else %>
+      <p> This gallery has no images </p>
+    <% end %>
+  </div>
 
   <div style="padding-top:10px;">
     <% if params[:view_name] == "my_galleries" %>

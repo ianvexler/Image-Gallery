@@ -1,5 +1,11 @@
 class SessionsController < ApplicationController
-    def new; end
+    #Controller to deal with the sessions
+
+    def new
+        if session[:logged_in]
+            redirect_to error_path
+        end
+    end
 
     def create
         flash[:alert] = []
@@ -12,7 +18,18 @@ class SessionsController < ApplicationController
 
             redirect_to root_path
         else
-            flash[:alert] << "Invalid inputs"
+            if !params[:email].present?
+                flash[:alert] << "Email can't be empty"
+            end
+    
+            if !params[:password].present?
+                flash[:alert] << "Password can't be empty"
+            end
+            
+            if params[:email].present? && params[:password].present?
+                flash[:alert] << "Invalid inputs"
+            end
+
             redirect_to login_path
         end
     end

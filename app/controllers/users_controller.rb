@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :validate_user, only: %i[ show edit ]
   
   # GET /users or /users.json
   def index
@@ -11,10 +12,15 @@ class UsersController < ApplicationController
     if session[:user_id].nil?
       redirect_to login_url
     end
+
   end
 
   # GET /users/new
   def new
+    if session[:logged_in]
+      redirect_to error_path
+    end
+
     @user = User.new
   end
 
@@ -66,5 +72,12 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:email, :username, :password, :password_confirmation)
+    end
+
+    # Validates if it is the correct user
+    def validate_user
+      if !(session[:user_id] == @user.id)
+        redirect_to error_access_path
+      end
     end
 end

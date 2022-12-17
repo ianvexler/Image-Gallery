@@ -10,6 +10,7 @@ class GalleriesController < ApplicationController
       if session[:user_id].nil?
         redirect_to login_url
       else
+        @galleries = get_galleries_by_user_id()
         render 'my_galleries'
       end
     else

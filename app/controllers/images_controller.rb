@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
-  before_action :set_image, only: %i[ edit show update destroy ]
-  before_action :set_gallery_id, only: %i[ new ]
+  before_action :set_image, only: %i[ show update destroy ]
+  before_action :set_gallery_id, only: %i[ new update ]
 
   # GET /images or /images.json
   def index
@@ -19,7 +19,12 @@ class ImagesController < ApplicationController
     if session[:user_id].nil?
       redirect_to login_url
     else
-      @gallery = Gallery.find(@gallery_id)
+      begin
+        @gallery = Gallery.find(@gallery_id)
+      rescue ActiveRecord::RecordNotFound
+        redirect_to error_path
+      end
+      
       @image = Image.new
     end
   end
@@ -29,6 +34,7 @@ class ImagesController < ApplicationController
     if session[:user_id].nil?
       redirect_to login_url
     end
+    set_image
 
     @gallery = get_gallery_by_image_id(@image.gallery_id)
   end
@@ -42,8 +48,8 @@ class ImagesController < ApplicationController
         format.html { redirect_to image_url(@image), notice: "Image was successfully created." }
         format.json { render :show, status: :created, location: @image }
       else
-        format.html { redirect_to new_image_path(gallery_id: @gallery_id), status: :unprocessable_entity }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @image.errors, gallery_id: @gallery_id,status: :unprocessable_entity }
       end
     end
   end
@@ -75,12 +81,13 @@ class ImagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_image
       begin
-        @image = Image.find(params[:id])
+        @image = Image.find_by_id(params[:id])
       rescue ActiveRecord::RecordNotFound
         redirect_to error_path
       end
     end
 
+    # Sets the gallery_id according to the given parameters
     def set_gallery_id
       @gallery_id = params[:gallery_id]
     end
