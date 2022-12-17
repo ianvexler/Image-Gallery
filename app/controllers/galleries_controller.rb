@@ -3,7 +3,9 @@ class GalleriesController < ApplicationController
 
   # GET /galleries or /galleries.json
   def index
-    @galleries = Gallery.all
+    @q = Gallery.ransack(params[:q])
+    @galleries = @q.result(distinct: true)
+    
     if params[:view_name] == "my_galleries"
       if session[:user_id].nil?
         redirect_to login_url

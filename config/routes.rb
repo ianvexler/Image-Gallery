@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   root to: "galleries#index"
 
+  get "search", to: "search#index"
+
   # Sign up routes
   get "sign_up", to: "users#new"
   post "sign_up", to: "users#create"

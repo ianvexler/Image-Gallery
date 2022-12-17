@@ -1,4 +1,4 @@
-<nav class="relative flex flex-wrap items-center justify-between px-2 py-3 bg-blue-800 mb-3 z-20">
+<nav class="relative flex flex-wrap items-center justify-between px-2 py-3 bg-indigo-900 mb-3 z-20">
   <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
     <div class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
       <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white" href="#pablo">
@@ -9,29 +9,35 @@
       </button>
     </div>
     <div class="lg:flex flex-grow items-center hidden" id="example-collapse-navbar">
-      <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
-        <li class="nav-item">
+      <ul class="table flex flex-col lg:flex-row list-none lg:ml-auto">
+        <li class="inline-block text-center	nav-item">
             <%= link_to "All Galleries", galleries_path(view_name: "all_galleries"), class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
         </li>
-        <li class="nav-item">
+        <li class="inline-block text-center	nav-item">
           <% if session[:logged_in] %>
             <%= link_to "My Galleries", galleries_path(view_name: "my_galleries"), class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
           <% end %>
         </li>
-        <li class="nav-item">
-          <% if session[:logged_in].nil? || !session[:logged_in] %>
-              <div>
-                  <%= link_to "Login", login_path, class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
-                  <%= link_to "Sign Up", sign_up_path, class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
-              </div>
-          <% end %>
+  
+        <% if session[:logged_in].nil? || !session[:logged_in] %>
+            <li class="inline-block text-center	nav-item">
+              <%= link_to "Login", login_path, class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
+              <%= link_to "Sign Up", sign_up_path, class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
+            </li>
+        <% end %>
 
-          <% if session[:logged_in] %>
-              <div>
-                  <%= link_to "Profile", user_path(session[:user_id]), class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
-                  <%= link_to "Logout", logout_path, class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4", data: { turbo_method: "post" } %>
-              </div>
-          <% end %>
+        <% if session[:logged_in] %>
+            <li class="inline-block text-center	nav-item">
+              <%= link_to "Profile", user_path(session[:user_id]), class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4" %>
+            </li>
+
+            <li class="inline-block text-center	nav-item">
+              <%= link_to "Logout", logout_path, class: "block mt-4 lg:inline-block lg:mt-0 text-white hover:text-stone-300 mr-4", data: { turbo_method: "post" } %>
+            </li>
+        <% end %>
+
+        <li class="inline-block	text-center	nav-item">
+          <%= render 'search/form' %>
         </li>
       </ul>
     </div>
