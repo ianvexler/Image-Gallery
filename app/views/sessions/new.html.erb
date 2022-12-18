@@ -1,26 +1,9 @@
 <h4 class="text-3xl font-normal leading-normal mt-0 mb-2 text-zinc-800">Login</h4>
 
-<% if flash.any? %>
-  <div role="alert" class="py-2">
-    <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-        <%= pluralize(flash.each.count, "error") %> prohibited this user from being saved:
-    </div>
-    <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-      <ul>
-        <% flash.each do |type, msg| %>
-          <% msg.each do |m| %>
-            <li><%= m %></li>
-          <% end %>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-<% end %>
-
 <%= form_with model: @user, url: login_path do |form| %>
   <div class="mb-6">
     <%= form.label "Email", class: "block mb-2 text-sm font-medium text-gray-900" %>
-    <%= form.text_field :email, id: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "name@email.com" %>
+    <%= h form.text_field :email, id: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "name@email.com" %>
   </div>
   <div class="mb-6">
     <%= form.label "Password", class: "block mb-2 text-sm font-medium text-gray-900" %>

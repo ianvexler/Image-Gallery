@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project allows users to upload/edit/delete images to galleries. They can also explore, search and look at other galleries. 
 
-Things you may want to cover:
+* Ruby version: 3.1.2
 
-* Ruby version
+A docker repository has been created for this project
 
-* System dependencies
+Make sure you have docker installed in your machine
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run:
+    docker run -dp 3000:3000 ianvexler/image-gallery
+    docker run <image>
+    

@@ -37,25 +37,29 @@ class ImagesController < ApplicationController
     set_image
 
     @gallery = get_gallery_by_image_id(@image.gallery_id)
+    @gallery_id = @gallery.user_id
   end
 
   # POST /images or /images.json
   def create
     @image = Image.new(image_params)
+    @gallery_id = @image.gallery_id
 
     respond_to do |format|
       if @image.save
         format.html { redirect_to image_url(@image), notice: "Image was successfully created." }
         format.json { render :show, status: :created, location: @image }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @image.errors, gallery_id: @gallery_id,status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity}
+        format.json { render json: @image.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /images/1 or /images/1.json
   def update
+    @gallery_id = @image.gallery_id
+
     respond_to do |format|
       if @image.update(image_params)
         format.html { redirect_to image_url(@image), notice: "Image was successfully updated." }

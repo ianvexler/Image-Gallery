@@ -1,3 +1,5 @@
+include ERB::Util
+
 class ApplicationController < ActionController::Base
     helper_method :get_user_by_id, :get_images_by_gallery_id, :get_galleries_by_user_id
     before_action :set_query
