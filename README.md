@@ -10,5 +10,5 @@ Make sure you have docker installed in your machine
 
 To run the code run: 
 - docker run -dp 3000:3000 ianvexler/gallery
-- docker run <image>
+- docker run IMAGE_ID
     
