@@ -8,7 +8,7 @@ A docker repository has been created for this project
 
 Make sure you have docker installed in your machine
 
-Run:
-docker run -dp 3000:3000 ianvexler/gallery
-docker run <image>
+To run the code run: 
+- docker run -dp 3000:3000 ianvexler/gallery
+- docker run <image>
     
