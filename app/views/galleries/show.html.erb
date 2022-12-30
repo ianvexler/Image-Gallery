@@ -25,7 +25,7 @@
               <% @images.each do |image| %>
                 <div class="flex flex-wrap w-1/4">
                   <div class="w-full p-1 md:p-2">
-                    <a href="#" onclick="toggleModal('modal-id<%= num %>')">
+                    <a onclick="toggleModal('modal-id<%= num %>')">
                       <img src=<%=image.image_url %> class="block hover:opacity-70 object-cover object-center w-full h-full">
                     </a>
                     
@@ -37,11 +37,6 @@
                             <h3 class="text-3xl font-semibold">
                               Image
                             </h3>
-                            <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('modal-id<%= num %>')">
-                              <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                                ×
-                              </span>
-                            </button>
                           </div>
                           <div class="relative p-6 flex-auto">
                             <p class="my-4 text-slate-500 text-lg leading-relaxed">
@@ -49,7 +44,11 @@
                             </p>
                           </div>
                           <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                            <button class="hover:text-purple-900 underline" type="button" onclick="toggleModal('modal-id<%= num %>')">
+                            <% if session[:user_id] == @gallery.user_id %>
+                              <%= link_to "Edit this image", edit_image_path(image), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %> 
+                              <%= link_to "Delete image", image, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800", data: { turbo_method: :delete } %>
+                            <% end %>
+                            <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" type="button" onclick="toggleModal('modal-id<%= num %>')">
                               Close
                             </button>
                           </div>

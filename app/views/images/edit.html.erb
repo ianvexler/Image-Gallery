@@ -9,5 +9,5 @@
 <br>
 
 <div style="padding-top:10px;">
-  <%= link_to "← Back to Image", @image, class: "hover:text-purple-900 underline" %>
+  <%= link_to "← Back to gallery", gallery_path(@image.gallery_id, view_name: "all_galleries"), class: "hover:text-purple-900 underline" %>
 </div>
