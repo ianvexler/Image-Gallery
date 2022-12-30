@@ -21,13 +21,53 @@
       <section class="overflow-hidden text-gray-700">
         <div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
           <div class="flex flex-wrap -m-1 md:-m-2">
+              <% num = 0 %>
               <% @images.each do |image| %>
-
                 <div class="flex flex-wrap w-1/4">
                   <div class="w-full p-1 md:p-2">
-                    <%= link_to image_tag(image.image_url, class: "block hover:opacity-70 object-cover object-center w-full h-full"), image %>
+                    <a href="#" onclick="toggleModal('modal-id<%= num %>')">
+                      <img src=<%=image.image_url %> class="block hover:opacity-70 object-cover object-center w-full h-full">
+                    </a>
+                    
+                    <!-- Modal concept from: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/javascript/modals/regular -->
+                    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="modal-id<%= num %>">
+                      <div class="relative w-auto my-6 mx-auto max-w-3xl">
+                        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                          <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                            <h3 class="text-3xl font-semibold">
+                              Image
+                            </h3>
+                            <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('modal-id<%= num %>')">
+                              <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                ×
+                              </span>
+                            </button>
+                          </div>
+                          <div class="relative p-6 flex-auto">
+                            <p class="my-4 text-slate-500 text-lg leading-relaxed">
+                              <%= render image %>
+                            </p>
+                          </div>
+                          <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                            <button class="hover:text-purple-900 underline" type="button" onclick="toggleModal('modal-id<%= num %>')">
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id<%= num %>-backdrop"></div>
+                    <script type="text/javascript">
+                      function toggleModal(modalID){
+                        document.getElementById(modalID).classList.toggle("hidden");
+                        document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+                        document.getElementById(modalID).classList.toggle("flex");
+                        document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+                      }
+                    </script>
                   </div>
                 </div>
+                <% num += 1 %>
               <% end %>
           </div>
         </div>
