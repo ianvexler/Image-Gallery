@@ -24,9 +24,6 @@ Rails.application.routes.draw do
   post "logout", to: "sessions#delete"
   patch "logout", to: "sessions#delete"
 
-  # Gallery routes
-  get "slideshow", to: "galleries#slideshow"
-
   get "error", to: "error#index"
   get "error_access", to: "error#access"
 
