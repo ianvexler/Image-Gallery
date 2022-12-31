@@ -44,6 +44,7 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(image_params)
     @gallery_id = @image.gallery_id
+    @gallery = get_gallery_by_image_id(@gallery_id)
 
     respond_to do |format|
       if @image.save
