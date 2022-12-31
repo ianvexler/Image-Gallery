@@ -29,5 +29,4 @@ Rails.application.routes.draw do
 
   # In case incorrect route is given
   get '*path', to: "error#index"
-
 end
