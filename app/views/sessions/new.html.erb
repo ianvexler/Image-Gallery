@@ -2,18 +2,20 @@
 
 <% if flash.any? %>
   <div role="alert" class="py-2">
-    <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-        <%= pluralize(flash[:alert].count, "error") %> prohibited this gallery from being saved:
-    </div>
-    <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-      <ul>
-        <% flash.each do |type, msg| %>
-          <% msg.each do |m| %>
-            <li><%= m %></li>
+    <% if !flash[:alert].nil? %>
+      <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+          <%= pluralize(flash[:alert].count, "error") %> prohibited this user to login:
+      </div>
+      <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+        <ul>
+          <% flash.each do |type, msg| %>
+            <% msg.each do |m| %>
+              <li><%= m %></li>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
-    </div>
+        </ul>
+      </div>
+    <% end %>
   </div>
 <% end %>
 
