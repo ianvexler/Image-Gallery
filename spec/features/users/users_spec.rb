@@ -68,7 +68,12 @@ RSpec.describe 'create user and session', type: :system do
     end
 
     scenario 'edit user' do
-        test_login
+        user = User.create(email: 'email', username: 'username', password: 'password', password_confirmation: 'password')
+
+        visit login_path
+        fill_in 'email', with: 'email'
+        fill_in 'password', with: 'password'
+        click_button 'Login'
         
         visit '/users/1/edit'
 
