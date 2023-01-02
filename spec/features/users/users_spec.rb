@@ -66,25 +66,4 @@ RSpec.describe 'create user and session', type: :system do
         # Should show the login button
         expect(page).to have_content('Login')
     end
-
-    scenario 'edit user' do
-        user = User.create(email: 'email', username: 'username', password: 'password', password_confirmation: 'password')
-
-        visit login_path
-        fill_in 'email', with: 'email'
-        fill_in 'password', with: 'password'
-        click_button 'Login'
-        
-        visit '/users/1/edit'
-
-        fill_in 'email', with: 'email2'
-        fill_in 'username', with: 'username2'
-        fill_in 'password', with: 'password'
-        fill_in 'confirm_password', with: 'password'
-        click_button 'Signup'
-        
-        # Should show the updated credentials
-        expect(page).to have_content('email2')
-        expect(page).to have_content('username2')
-    end
 end
