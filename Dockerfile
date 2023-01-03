@@ -9,6 +9,7 @@ COPY . /usr/src/app/
 WORKDIR /usr/src/app
 
 RUN bundle install
+RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
 CMD rails server -b 0.0.0.0
